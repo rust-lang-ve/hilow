@@ -1,0 +1,8 @@
+.git/
+.github/
+.vscode/
+
+docker/volumes
+
+.gitignore
+*.swp
