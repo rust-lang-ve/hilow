@@ -6,10 +6,10 @@
 
 <hr />
 
-
 ## Contents
 
 - [Requirements](#requirements)
+- [Environment Variables](#environment-variables)
 - [API](#api)
   - [Session Management](#session-management)
   - [User Management](#user-management)
@@ -29,7 +29,58 @@
 ## Requirements
 
 - Docker
+- Docker Compose
 - Rust
+
+## Environment Variables
+
+Key | Description | Example
+--- | --- | ---
+`RUST_LOG` | Log level | `warn,info,error,debug`
+`POSTGRES_USER` | PostgreSQL User | N/A
+`POSTGRES_PASSWORD` | PostgreSQL Password | N/A
+`POSTGRES_DB` | PostgreSQL Database Name | N/A
+
+## Getting Started
+
+Theres two ways to run this project:
+
+- Simple: Using your local resources
+- Docker: All resources run through Docker with the `docker-compose` file
+
+### Simple
+
+In order to run the project on it's _Simple_ mode, run the PostgreSQL database
+using:
+
+```sh
+docker-compose up --build database
+```
+
+And in another Terminal instance you must run:
+
+```sh
+cargo run
+```
+
+If you want to use auto reload you must install both executable crates:
+
+- `cargo-watch`
+
+```sh
+cargo install cargo-watch
+```
+
+Then execute you application using the `bin/dev.sh` script:
+
+```sh
+bin/dev.sh
+```
+
+### Docker
+
+Docker is ready for execution, run: `docker-compose up --build` in order to run
+this project all on Docker.
 
 ## API
 
