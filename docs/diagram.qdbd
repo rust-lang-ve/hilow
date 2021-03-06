@@ -1,0 +1,47 @@
+# Go to https://app.quickdatabasediagrams.com/#/
+# to display and edit this database diagram
+
+User
+-
+ID PK UUID
+Email UNIQUE VARCHAR(255)
+Username UNIQUE VARCHAR(50)
+Follows UUID FK >- User.ID
+Followers INT
+
+Profile
+-
+ID PK UUID
+UserID UUID FK - User.ID
+AvatarID UUID NULL FK - File.ID
+Name VARCHAR(120)
+Surname NULL VARCHAR(120)
+
+Post
+-
+ID PK UUID
+UserID FK - User.ID
+Files UUID NULL FK >- File.ID
+ParentID NULL FK - Post.ID
+Body VARCHAR(360)
+Hashtags NULL FK -< Hashtag.ID
+
+Hashtag
+-
+ID PK UUID
+Name UNIQUE VARCHAR(50)
+
+File
+-
+ID PK UUID
+MimeType VARCHAR(120)
+Bytes BYTEA
+Size INT
+URL VARCHAR(255)
+Sha256 VARCHAR(255)
+
+Secret
+-
+ID PK UUID
+UserID UUID FK - User.ID
+Hash VARCHAR(255)
