@@ -1,12 +1,9 @@
 #[macro_use]
 extern crate log;
 
-use actix_web::{get, web, App, HttpServer, Responder};
+use actix_web::{App, HttpServer};
 
-#[get("/{id}/{name}")]
-async fn index(web::Path((id, name)): web::Path<(u32, String)>) -> impl Responder {
-    format!("Hello {}! id:{}", name, id)
-}
+use hilow::router::router;
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
@@ -18,7 +15,7 @@ async fn main() -> std::io::Result<()> {
     env_logger::init();
 
     info!("Serving on http://0.0.0.0:7878");
-    HttpServer::new(|| App::new().service(index))
+    HttpServer::new(|| App::new().configure(router))
         .bind("0.0.0.0:7878")?
         .run()
         .await

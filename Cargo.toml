@@ -1,5 +1,5 @@
 [package]
-name = "hilow-social-feed-api"
+name = "hilow"
 version = "0.0.0"
 authors = ["Esteban Borai <estebanborai@gmail.com>"]
 edition = "2018"
