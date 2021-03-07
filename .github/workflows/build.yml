@@ -1,0 +1,24 @@
+name: build
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        rust:
+          - stable
+          - beta
+          - nightly
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: cargo build
+        uses: actions-rs/cargo@v1
+        with:
+          command: build
