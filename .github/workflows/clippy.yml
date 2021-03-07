@@ -1,4 +1,4 @@
-name: CI
+name: clippy
 on:
   pull_request:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  ci:
+  clippy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -23,25 +23,9 @@ jobs:
           profile: minimal
           toolchain: ${{ matrix.rust }}
           override: true
-          components: rustfmt, clippy
+          components: clippy
 
-      - name: build
-        uses: actions-rs/cargo@v1
-        with:
-          command: build
-
-      - name: test
-        uses: actions-rs/cargo@v1
-        with:
-          command: test
-
-      - name: fmt
-        uses: actions-rs/cargo@v1
-        with:
-          command: fmt
-          args: --all -- --check
-
-      - name: clippy
+      - name: cargo clippy
         uses: actions-rs/cargo@v1
         with:
           command: clippy
