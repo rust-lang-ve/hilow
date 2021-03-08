@@ -1,0 +1,128 @@
+openapi: 3.0.0
+info:
+  title: Hilow Social Feed API
+  description: >-
+    "Hilow" is a microblogging social feed where users are able to share they
+    thoughts on different topics.
+  version: 1.0.0
+  license:
+    name: GPLv3
+    url: 'https://www.gnu.org/licenses/gpl-3.0.en.html'
+  contact:
+    url: 'https://github.com/rust-lang-ve/hilow-social-feed-api'
+servers:
+  - url: 'http://localhost:8080/api/v1'
+    description: Local server to develop
+  - url: 'https://virtserver.swaggerhub.com/caligari/hilow-api/1.0.0'
+    description: SwaggerHub API Auto Mocking
+paths:
+  /info/healthcheck:
+    summary: Inform about the health of the service
+    head:
+      summary: Endpoint to check if service is listening.
+      responses:
+        default:
+          description: Default error sample response
+    get:
+      summary: Return the status for the service.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  serviceVersion: 
+                    type: string
+                  serviceStatus:
+                    type: string
+  /session/login:
+    post:
+      summary: Authenticate an user by password.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+        required: true
+      responses:
+        '200':
+          description: Successful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Invalid credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /session/logout:
+    get:
+      summary: Close the current session.
+      responses:
+        '200':
+          description: Succcesful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+  /user/register:
+    post:
+      summary: Registers a new user.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserRegisterRequest'
+        required: true
+      responses:
+        '200':
+          description: Succcesful operation.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+components:
+  schemas:
+    ApiResponse:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        type:
+          type: string
+        message:
+          type: string
+    LoginRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: User ID (Email or Username)
+        userPassword:
+          type: string
+          description: User's personal password
+    LoginResponse:
+      type: object
+      properties:
+        apiToken:
+          type: string
+    UserRegisterRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          description: User's Email.
+        username:
+          type: string
+          description: User's Username.
+        fullName:
+          type: string
+          description: User's full name.
+        password:
+          type: string
+          description: User's Password.
