@@ -1,8 +1,12 @@
 .git/
 .github/
 .vscode/
+target/
 
 docker/volumes
 
 .gitignore
 *.swp
+
+*.md
+LICENSE

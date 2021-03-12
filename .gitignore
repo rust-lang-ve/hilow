@@ -40,3 +40,6 @@ bundle
 .Trashes
 ehthumbs.db
 Thumbs.db
+
+# Docker volumes
+docker/volumes/
