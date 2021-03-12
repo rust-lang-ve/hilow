@@ -10,7 +10,6 @@ services:
       - 7878:7878
     volumes:
       - ${PWD}:/app
-      - ${PWD}/docker/volumes/target:/app/target
     restart: always
     depends_on:
       - database
