@@ -41,5 +41,10 @@ bundle
 ehthumbs.db
 Thumbs.db
 
-# Docker volumes
+# Docker volumes #
+##################
 docker/volumes/
+
+# dotenv files #
+################
+.env

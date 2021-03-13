@@ -40,6 +40,7 @@ Key | Description | Example
 `POSTGRES_USER` | PostgreSQL User | N/A
 `POSTGRES_PASSWORD` | PostgreSQL Password | N/A
 `POSTGRES_DB` | PostgreSQL Database Name | N/A
+`POSTGRES_HOST` | PostgreSQL Hostname | N/A
 
 ## Getting Started
 
