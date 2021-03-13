@@ -34,6 +34,9 @@
 
 ## Environment Variables
 
+A `.env` file is required to run this application. Use the `.env.sample` file
+to create a `.env` file with the desired configuration.
+
 Key | Description | Example
 --- | --- | ---
 `RUST_LOG` | Log level | `warn,info,error,debug`
@@ -41,6 +44,8 @@ Key | Description | Example
 `POSTGRES_PASSWORD` | PostgreSQL Password | N/A
 `POSTGRES_DB` | PostgreSQL Database Name | N/A
 `POSTGRES_HOST` | PostgreSQL Hostname | N/A
+`DATABASE_URL` | Database URL used by SQLx | `postgres://user:secret@127.0.0.1/dbname`
+`DB_MAX_CONNECTIONS` | Database max simultaneous connections | `5`
 
 ## Getting Started
 
