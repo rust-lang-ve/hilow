@@ -1,8 +1,6 @@
-use actix_web::web::Data;
-use actix_web::{App, HttpServer};
-use anyhow::Context;
-use hilow::router::router;
-use hilow::state::State;
+use std::net::TcpListener;
+
+use hilow::server::run;
 
 #[actix_web::main]
 async fn main() -> anyhow::Result<()> {
@@ -11,21 +9,9 @@ async fn main() -> anyhow::Result<()> {
     }
 
     env_logger::init();
+    let listener =
+        TcpListener::bind("0.0.0.0:7878").expect("Unable to bind the service in 0.0.0.0:7878");
 
-    log::info!("Serving on http://0.0.0.0:7878");
-
-    let state = State::new().context("Failed to initialze \"State\"!")?;
-    let state = Data::new(state);
-
-    HttpServer::new(move || {
-        // `Data<State>` is being cloned to avoid creating
-        // one `State` instance per worker.
-        // Otherwise, `Data<State>` will be intialized as many
-        // times as the total count of workers configured
-        App::new().app_data(state.clone()).configure(router)
-    })
-    .bind("0.0.0.0:7878")?
-    .run()
-    .await?;
+    run(listener)?.await?;
     Ok(())
 }

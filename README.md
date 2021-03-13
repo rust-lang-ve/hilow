@@ -44,6 +44,7 @@ Key | Description | Example
 `POSTGRES_PASSWORD` | PostgreSQL Password | N/A
 `POSTGRES_DB` | PostgreSQL Database Name | N/A
 `POSTGRES_HOST` | PostgreSQL Hostname | N/A
+`POSTGRES_CONN_TIMEOUT` | PostgreSQL connection timeout in seconds | 2
 `DATABASE_URL` | Database URL used by SQLx | `postgres://user:secret@127.0.0.1/dbname`
 `DB_MAX_CONNECTIONS` | Database max simultaneous connections | `5`
 
