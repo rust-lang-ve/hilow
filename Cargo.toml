@@ -6,10 +6,16 @@ edition = "2018"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+path = "src/lib.rs"
+
+[[bin]]
+path = "src/bin/main.rs"
+name = "hilow"
+
 [dependencies]
 anyhow = "1"
 actix-web = "3"
-actix-rt = "2"
 chrono = { version = "0.4", features = ["serde"] }
 dotenv = "0.15"
 env_logger = "0.8"
@@ -23,4 +29,6 @@ sqlx = { version = "0.4", features = ["offline", "postgres", "runtime-actix-nati
 uuid = "0.8"
 
 [dev-dependencies]
-actix-rt = "2"
+actix-rt = "1"
+reqwest = "0.10"
+tokio = { version = "0.2", features = ["rt-core"] }

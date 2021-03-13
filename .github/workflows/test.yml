@@ -43,8 +43,9 @@ jobs:
         run: |
           cargo install sqlx-cli --no-default-features --features postgres
           cargo sqlx migrate run
+
       - name: Check sqlx metadata file
-        run: cargo sqlx prepare --check -- --bin main
+        run: cargo sqlx prepare --check -- --bin hilow
 
       - name: cargo test
         uses: actions-rs/cargo@v1

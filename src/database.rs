@@ -20,8 +20,13 @@ pub fn make_db_pool() -> Result<DbPool> {
         .parse::<u32>()
         .context("Invalid value provided for \"DB_MAX_CONNECTIONS\" expected numeric value")?;
 
+    let connection_timeout = var("POSTGRES_CONN_TIMEOUT")
+        .unwrap_or_else(|_| String::from("2"))
+        .parse::<u64>()
+        .context("The value provided to \"POSTGRES_CONN_TIMEOUT\" is not numeric")?;
     PgPoolOptions::new()
         .max_connections(max_db_conns)
+        .connect_timeout(std::time::Duration::from_secs(connection_timeout))
         .connect_lazy(database_url.as_str())
         .map_err(Error::from)
 }
