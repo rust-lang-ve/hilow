@@ -6,6 +6,8 @@ services:
       context: .
       dockerfile: dev.Dockerfile
     env_file: .env.development
+    environment:
+      POSTGRES_HOST: database
     ports:
       - 7878:7878
     volumes:
@@ -13,7 +15,8 @@ services:
     restart: always
     depends_on:
       - database
-
+    links:
+      - database
   database:
     image: postgres:13
     env_file: .env.development
