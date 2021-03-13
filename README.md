@@ -1,6 +1,6 @@
 <img align="left" width="200" src="https://raw.githubusercontent.com/rust-lang-ve/design/main/assets/logo_above.png" />
 
-# Hilow Social Feed API
+# Hilow
 
 "Hilow" is a microblogging social feed where users are able to share they thoughts on different topics
 
@@ -93,7 +93,7 @@ URI | Method | Req. Body | Res. Body | Description
 --- | --- | --- | --- | ---
 `login` | POST | [Login Req](#LoginRequest) | [Login Resp](#LoginResponse) | Update current logged User Info.
 `logout` | POST | - | - | Update current logged User Info.
-`register` | POST | [Register Request](#RegisterRequest) | [Register Response](#RegisterResponse) | Register a new User.
+`signup` | POST | [Register Request](#RegisterRequest) | [Register Response](#RegisterResponse) | Register a new User.
 
 ### User Management
 
