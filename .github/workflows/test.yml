@@ -14,13 +14,25 @@ jobs:
           - stable
           - beta
           - nightly
-
+    services:
+      postgres:
+        image: postgres
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_PASSWORD: hilow
+          POSTGRES_USER: hilow
+          POSTGRES_DB: hilow
     env:
-      SQLX_OFFLINE: 1
-
+      DATABASE_URL: postgres://hilow:hilow@localhost/hilow
     steps:
       - uses: actions/checkout@v2
-
+      - name: Run migrations
+        run: |
+          cargo install sqlx-cli --no-default-features --features postgres
+          cargo sqlx migrate run
+      - name: Check sqlx metadata file
+        run: cargo sqlx prepare --check -- --bin main
       - name: cargo test
         uses: actions-rs/cargo@v1
         with:
