@@ -15,6 +15,9 @@ jobs:
           - beta
           - nightly
 
+    env:
+      SQLX_OFFLINE: 1
+
     steps:
       - uses: actions/checkout@v2
 

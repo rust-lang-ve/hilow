@@ -1,8 +1,8 @@
-use actix_web::web::{get, resource, ServiceConfig};
+use actix_web::web::{post, resource, ServiceConfig};
 
-use crate::handlers::hello;
+use crate::handlers::signup;
 
 /// Registers HTTP services to the current server instance
 pub fn router(cfg: &mut ServiceConfig) {
-    cfg.service(resource("/hello").route(get().to(hello)));
+    cfg.service(resource("/signup").route(post().to(signup)));
 }
