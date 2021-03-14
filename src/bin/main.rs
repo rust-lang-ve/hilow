@@ -1,26 +1,31 @@
-#[macro_use]
-extern crate log;
-
-use actix_web::{web, App, HttpServer};
-
+use actix_web::web::Data;
+use actix_web::{App, HttpServer};
+use anyhow::Context;
 use hilow::router::router;
-use hilow::state::init_app_state;
+use hilow::state::State;
 
 #[actix_web::main]
 async fn main() -> anyhow::Result<()> {
     if cfg!(debug_assertions) {
-        dotenv::from_filename(".env.development")
-            .expect("Unable to find \".env.development\" in the CWD");
+        dotenv::from_filename(".env").expect("Unable to find \".env\" in the CWD");
     }
 
     env_logger::init();
 
-    let app_state = web::Data::new(init_app_state().await?);
+    log::info!("Serving on http://0.0.0.0:7878");
 
-    info!("Serving on http://0.0.0.0:7878");
-    HttpServer::new(move || App::new().app_data(app_state.clone()).configure(router))
-        .bind("0.0.0.0:7878")?
-        .run()
-        .await?;
+    let state = State::new().context("Failed to initialze \"State\"!")?;
+    let state = Data::new(state);
+
+    HttpServer::new(move || {
+        // `Data<State>` is being cloned to avoid creating
+        // one `State` instance per worker.
+        // Otherwise, `Data<State>` will be intialized as many
+        // times as the total count of workers configured
+        App::new().app_data(state.clone()).configure(router)
+    })
+    .bind("0.0.0.0:7878")?
+    .run()
+    .await?;
     Ok(())
 }
