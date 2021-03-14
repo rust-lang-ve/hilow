@@ -13,4 +13,4 @@ actix-rt = "2"
 dotenv = "0.15"
 env_logger = "0.8"
 log = "0.4"
-sqlx = { version = "0.4", features = ["postgres", "runtime-actix-native-tls"] }
+sqlx = { version = "0.4", default-features = false, features = ["offline", "postgres", "runtime-actix-native-tls"] }
