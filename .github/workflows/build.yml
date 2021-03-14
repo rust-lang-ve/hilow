@@ -20,6 +20,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Cache .cargo and target
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo
+            ./target
+          key: ${{ runner.os }}-${{ matrix.rust }}-cargo-build-${{ hashFiles('**/Cargo.toml') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.rust }}-cargo-build-${{ hashFiles('**/Cargo.lock') }}
+            ${{ runner.os }}-${{ matrix.rust }}-cargo-build-
+
       - name: cargo build
         uses: actions-rs/cargo@v1
         with:
