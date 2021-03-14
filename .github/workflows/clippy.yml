@@ -28,6 +28,17 @@ jobs:
           override: true
           components: clippy
 
+      - name: Cache .cargo and target
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo
+            ./target
+          key: ${{ runner.os }}-${{ matrix.rust }}-cargo-clippy-${{ hashFiles('**/Cargo.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-${{ matrix.rust }}-cargo-clippy-${{ hashFiles('**/Cargo.lock') }}
+            ${{ runner.os }}-${{ matrix.rust }}-cargo-clippy-
+
       - name: cargo clippy
         uses: actions-rs/cargo@v1
         with:
