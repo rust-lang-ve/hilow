@@ -30,5 +30,3 @@ uuid = "0.8"
 
 [dev-dependencies]
 actix-rt = "1"
-reqwest = "0.10"
-tokio = { version = "0.2", features = ["rt-core"] }
