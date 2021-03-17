@@ -1,5 +1,3 @@
-use std::net::TcpListener;
-
 use hilow::server::run;
 
 #[actix_web::main]
@@ -9,9 +7,6 @@ async fn main() -> anyhow::Result<()> {
     }
 
     env_logger::init();
-    let listener =
-        TcpListener::bind("0.0.0.0:7878").expect("Unable to bind the service in 0.0.0.0:7878");
-
-    run(listener)?.await?;
+    run("0.0.0.0:7878").await?;
     Ok(())
 }
